@@ -2,18 +2,25 @@
 <html>
 	<head>
 		<title>OnlyFeet</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
-	<body>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>...</h1>
-				<p>...</p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="https://only-feet.github.io">onlyfeet</a></li>
-			</ul>
-		</footer>
+	<body style="overflow: hidden; margin: 0">
+		<script type="text/javascript">
+		function load(ytUrl) {
+			$(function () {
+				$("#video").css({
+					width: $(window).innerWidth() + "px",
+					height: $(window).innerHeight() + "px",
+				});
+				$(window).resize(function () {
+					$("#video").css({
+						width: $(window).innerWidth() + "px",
+						height: $(window).innerHeight() + "px",
+					});
+				});
+			});
+		}
+			load("");
+		</script><iframe id="video" src="//www.youtube.com/embed/QtBDL8EiNZo?autoplay=1" frameborder="0" allowfullscreen="" style="width: 1365px; height: 937px;"></iframe>
 	</body>
 </html>
