@@ -1,0 +1,270 @@
+<div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
+  <div class="cd-schedule__timeline">
+    <ul>
+      <li><span>15:00</span></li>
+      <li><span>15:30</span></li>
+      <!-- additional elements here -->
+    </ul>
+  </div> <!-- .cd-schedule__timeline -->
+
+  <div class="cd-schedule__events">
+    <ul>
+      <li class="cd-schedule__group">
+        <div class="cd-schedule__top-info"><span>Thursday</span></div>
+
+        <ul>
+          <li class="cd-schedule__event">
+            <a data-start="15:30" data-end="15:45" data-content="event-welcome" data-event="event-1" href="#0">
+              <em class="cd-schedule__name">Welcome</em>
+            </a>
+          </li>
+
+          <!-- other events here --> 
+          
+          <li class="cd-schedule__event">
+            <a data-start="15:45" data-end="16:15" data-content="event-jon" data-event="event-2" href="#0">
+              <em class="cd-schedule__name">What even is good security? A short discussion on the challenges of Information Security Assurance.</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="16:15" data-end="17:00" data-content="event-tib" data-event="event-3" href="#0">
+              <em class="cd-schedule__name">XML External Entity Injection</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="17:15" data-end="17:45" data-content="event-per" data-event="event-4" href="#0">
+              <em class="cd-schedule__name">My First Whitepaper</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="18:00" data-end="18:30" data-content="event-con" data-event="event-5" href="#0">
+              <em class="cd-schedule__name">Arctic Microgrids</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="18:45" data-end="19:15" data-content="event-p90" data-event="event-6" href="#0">
+              <em class="cd-schedule__name">Intro to Qubes-OS</em>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
+
+      <li class="cd-schedule__group">
+        <div class="cd-schedule__top-info"><span>Friday</span></div>
+
+        <ul>
+          <!-- events here --> 
+          <li class="cd-schedule__event">
+            <a data-start="16:30" data-end="16:45" data-content="event-welcome" data-event="event-1" href="#0">
+              <em class="cd-schedule__name">Welcome</em>
+            </a>
+          </li>
+
+          <!-- other events here --> 
+          
+          <li class="cd-schedule__event">
+            <a data-start="16:45" data-end="17:30" data-content="event-val" data-event="event-2" href="#0">
+              <em class="cd-schedule__name">Weak Passwords in the Wild - A fun dive</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="17:30" data-end="18:00" data-content="event-tib2" data-event="event-3" href="#0">
+              <em class="cd-schedule__name">How to gaslight people while playing hidden identity games.</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="18:00" data-end="18:30" data-content="event-hel" data-event="event-4" href="#0">
+              <em class="cd-schedule__name">Selling Yourself (but not like *that*, no shame to SWs): Making Interviews Work For You</em>
+            </a>
+          </li>
+          
+          <li class="cd-schedule__event">
+            <a data-start="18:30" data-end="19:30" data-content="event-tib3" data-event="event-5" href="#0">
+              <em class="cd-schedule__name">Feet Feud</em>
+            </a>
+          </li>
+    
+        </ul>
+      </li>
+
+      <!-- additional li.cd-schedule__group here --> 
+    </ul>
+  </div>
+
+  <div class="cd-schedule-modal">
+    <header class="cd-schedule-modal__header">
+      <div class="cd-schedule-modal__content">
+        <span class="cd-schedule-modal__date"></span>
+        <h3 class="cd-schedule-modal__name"></h3>
+      </div>
+
+      <div class="cd-schedule-modal__header-bg"></div>
+    </header>
+
+    <div class="cd-schedule-modal__body">
+      <div class="cd-schedule-modal__event-info"></div>
+      <div class="cd-schedule-modal__body-bg"></div>
+    </div>
+
+    <a href="#0" class="cd-schedule-modal__close text-replace">Close</a>
+  </div>
+</div> <!-- .cd-schedule -->
+
+
+
+.cd-schedule__group > ul {
+  position: relative;
+  padding: 0 var(--component-padding);
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cd-schedule__event {
+  flex-shrink: 0; // force them to stay on one line
+  float: left; // flex fallback
+  height: 150px;
+  width: 70%;
+  max-width: 300px;
+}
+
+.cd-schedule-modal {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition: transform .4s, visibility .4s;
+}
+
+.cd-schedule-modal--open { // this class is added as soon as an event is selected
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.js {
+  @include breakpoint(md) {
+    .cd-schedule__events {
+      width: 100%;
+
+      > ul {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+    }
+
+    .cd-schedule__group {
+      flex-basis: 0;
+      flex-grow: 1;
+    }
+
+    .cd-schedule__event {
+      position: absolute;
+      z-index: 3;
+      width: calc(100% + 2px); // top position and height will be set using js
+      left: -1px;
+    }
+  }
+}
+
+function ScheduleTemplate( element ) {
+  this.element = element;
+  this.timelineItems = this.element.getElementsByClassName('cd-schedule__timeline')[0].getElementsByTagName('li');
+  //..
+  this.singleEvents = this.element.getElementsByClassName('cd-schedule__event');
+  //..
+  this.initSchedule();
+};
+
+ScheduleTemplate.prototype.initSchedule = function() {
+  this.scheduleReset();
+  this.initEvents();
+};
+
+ScheduleTemplate.prototype.placeEvents = function() {
+  // on big devices - place events in the template according to their time/day
+  var self = this,
+    slotHeight = this.topInfoElement.offsetHeight;
+  for(var i = 0; i < this.singleEvents.length; i++) {
+    var anchor = this.singleEvents[i].getElementsByTagName('a')[0];
+    var start = getScheduleTimestamp(anchor.getAttribute('data-start')),
+      duration = getScheduleTimestamp(anchor.getAttribute('data-end')) - start;
+
+    var eventTop = slotHeight*(start - self.timelineStart)/self.timelineUnitDuration,
+      eventHeight = slotHeight*duration/self.timelineUnitDuration;
+
+    this.singleEvents[i].setAttribute('style', 'top: '+(eventTop-1)+'px; height: '+(eventHeight +1)+'px');
+  }
+};
+
+                                              
+                                              
+ScheduleTemplate.prototype.openModal = function(target) {
+  var self = this;
+  var mq = self.mq();
+  this.animating = true;
+
+  //update event name and time
+  this.modalEventName.textContent = target.getElementsByTagName('em')[0].textContent;
+  this.modalDate.textContent = target.getAttribute('data-start')+' - '+target.getAttribute('data-end');
+  this.modal.setAttribute('data-event', target.getAttribute('data-event'));
+
+  //update event content
+  this.loadEventContent(target.getAttribute('data-content'));
+
+  Util.addClass(this.modal, 'cd-schedule-modal--open');
+  
+  if( mq == 'mobile' ) {
+    self.modal.addEventListener('transitionend', function cb(){
+      self.animating = false;
+      self.modal.removeEventListener('transitionend', cb);
+    });
+  } else {
+    var eventPosition = target.getBoundingClientRect(),
+      eventTop = eventPosition.top,
+      eventLeft = eventPosition.left,
+      eventHeight = target.offsetHeight,
+      eventWidth = target.offsetWidth;
+
+    var windowWidth = window.innerWidth,
+      windowHeight = window.innerHeight;
+
+    var modalWidth = ( windowWidth*.8 > self.modalMaxWidth ) ? self.modalMaxWidth : windowWidth*.8,
+      modalHeight = ( windowHeight*.8 > self.modalMaxHeight ) ? self.modalMaxHeight : windowHeight*.8;
+
+    var modalTranslateX = parseInt((windowWidth - modalWidth)/2 - eventLeft),
+      modalTranslateY = parseInt((windowHeight - modalHeight)/2 - eventTop);
+    
+    var HeaderBgScaleY = modalHeight/eventHeight,
+      BodyBgScaleX = (modalWidth - eventWidth);
+
+    //change modal height/width and translate it
+    self.modal.setAttribute('style', 'top:'+eventTop+'px;left:'+eventLeft+'px;height:'+modalHeight+'px;width:'+modalWidth+'px;transform: translateY('+modalTranslateY+'px) translateX('+modalTranslateX+'px)');
+    //set modalHeader width
+    self.modalHeader.setAttribute('style', 'width:'+eventWidth+'px');
+    //set modalBody left margin
+    self.modalBody.setAttribute('style', 'margin-left:'+eventWidth+'px');
+    //change modalBodyBg height/width ans scale it
+    self.modalBodyBg.setAttribute('style', 'height:'+eventHeight+'px; width: 1px; transform: scaleY('+HeaderBgScaleY+') scaleX('+BodyBgScaleX+')');
+    //change modal modalHeaderBg height/width and scale it
+    self.modalHeaderBg.setAttribute('style', 'height: '+eventHeight+'px; width: '+eventWidth+'px; transform: scaleY('+HeaderBgScaleY+')');
+    
+    self.modalHeaderBg.addEventListener('transitionend', function cb(){
+      //wait for the  end of the modalHeaderBg transformation and show the modal content
+      self.animating = false;
+      Util.addClass(self.modal, 'cd-schedule-modal--animation-completed');
+      self.modalHeaderBg.removeEventListener('transitionend', cb);
+    });
+  }
+};                                              
+                                              
