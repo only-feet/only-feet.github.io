@@ -18,7 +18,10 @@
     </DataObject>
   </PageMap>
 -->
-	
+
+			
+			
+			
 	
 	<style>
          	body {
@@ -48,7 +51,28 @@
 	<body>
 	<p style="font-family:'Comic Sans', 'Comic Neue', cursive; color:#FF00FF; font-size: 40px;">Welcome to OnlyFeet! ^_^</p><br>
 		<marquee class="Marquee" width = "50%" direction="left" scrollamount="20" behavior="alternate">hEllo degenerates</marquee>
-		<br><br><br><br>
+		
+				
+		<br><br>
+		<h1> OnlyFeet CON LIVE </h1>
+    <!-- Add a placeholder for the Twitch embed -->
+    <div id="twitch-embed"></div>
+<!-- Load the Twitch embed JavaScript file -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+    <script type="text/javascript">
+      new Twitch.Embed("twitch-embed", {
+        width: 854,
+        height: 480,
+        channel: "footpics4sale",
+        // Only needed if this page is going to be embedded on other websites
+        parent: ["only-feet.github.io", "onlyfeet.tech"]
+      });
+    </script>
+		
+		
+		<br><br>
 		<img src=https://raw.githubusercontent.com/only-feet/only-feet.github.io/main/img/image0.gif>
 		<br>
 		<br>
